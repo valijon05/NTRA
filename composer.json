@@ -4,7 +4,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "NT\\RentApp\\": "src/"
+            "App\\": "src/"
         }
     },
     "require": {}
