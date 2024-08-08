@@ -1,5 +1,5 @@
 CREATE TABLE `users` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(255),
   `position` varchar(255),
   `phone` varchar(255),
@@ -7,7 +7,7 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `ads` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `user_id` integer,
   `title` varchar(255),
   `describtion` text,
@@ -21,7 +21,7 @@ CREATE TABLE `ads` (
 );
 
 CREATE TABLE `status` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255)
 );
 
