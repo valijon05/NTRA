@@ -9,13 +9,13 @@ class User
     }
 
     public function create(
-        string $id,
+        int $id,
         string $username,
         string $position,
         string $gender,
         string $phone,
     ){
-        $query = "INSERT INTO users(id,username, position, gender, phone) VALUES (:id,:username, :position, :gender, :phone)";
+        $query = "INSERT INTO users(username, position, gender, phone) VALUES (:username, :position, :gender, :phone)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':username', $username);
@@ -34,7 +34,7 @@ class User
     }
 
     public function updateUser(
-        int $id,
+     int $id,
      string $username,
      string $position,
      string $gender,
