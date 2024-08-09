@@ -13,12 +13,35 @@ class Branch{
         string  $name,
         string  $address,
     ){
-        $query = "INSERT INTO branches( name, address,created_at) VALUES ( :name, :address, NOW())";
+        $query = "INSERT INTO branch( name, address,created_at) VALUES ( :name, :address, NOW())";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':address', $address);
         $stmt->execute();
     }
+
+    public function getBranch(int $id){
+        $query = "SELECT * FROM branch WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateBranch(
+        int     $id,
+        string  $name,
+        string  $address,
+    ){
+        $query = "UPDATE branch SET name = :name, address = :address WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':address', $address);
+        $stmt->execute();
+    }
+
+
 
     
 

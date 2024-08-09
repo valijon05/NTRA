@@ -22,4 +22,4 @@ $branch = new Branch();
 
 //$status->deleteStatus(5);
 
-$branch ->create('Valijon','Qashqadaryo');
+$branch ->updateBranch(2,'vhsabj','wdh');
