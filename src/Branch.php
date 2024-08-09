@@ -33,11 +33,18 @@ class Branch{
         string  $name,
         string  $address,
     ){
-        $query = "UPDATE branch SET name = :name, address = :address WHERE id = :id";
+        $query = "UPDATE branch SET name = :name, address = :address, update_at = NOW() WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':address', $address);
+        $stmt->execute();
+    }
+
+    public function deleteBranch(int $id):void{
+        $query = "DELETE FROM branch WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 

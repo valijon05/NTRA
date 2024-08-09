@@ -22,4 +22,4 @@ $branch = new Branch();
 
 //$status->deleteStatus(5);
 
-$branch ->updateBranch(2,'vhsabj','wdh');
+$branch ->deleteBranch(3);
