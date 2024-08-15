@@ -1,9 +1,10 @@
 <?php
 
 namespace App;
-
+use PDO;
 class User
 {
+    private PDO $pdo;
     public function __construct() {
         $this->pdo = DB::connect();
     }

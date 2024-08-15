@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 namespace App;
-use App\Ads;
 use PDO;
 
 class Ads{
@@ -28,7 +27,7 @@ class Ads{
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':describtion', $describtion); // Corrected spelling
+        $stmt->bindParam(':describtion', $describtion);
         $stmt->bindParam(':status_id', $status_id);
         $stmt->bindParam(':branch_id', $branch_id);
         $stmt->bindParam(':address', $address);
@@ -38,12 +37,18 @@ class Ads{
         $stmt->execute();
     }
 
-    public function getAds(int $id){
+    public function getAd(int $id){
         $query ="SELECT * FROM ads WHERE id = :id";
         $stms = $this->pdo->prepare($query);
         $stms->bindParam(':id', $id);
         $stms->execute();
         var_dump($stms->fetch(PDO::FETCH_ASSOC));
+        
+    }
+
+    public function getAds(){
+        $query = "SELECT *, ads.address AS address FROM ads JOIN branch ON branch.id =ads.branch_id";
+        return $this->pdo->query("SELECT * FROM ads")->fetchAll();
         
     }
 
@@ -63,7 +68,7 @@ class Ads{
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':describtion', $describtion); // Corrected spelling
+        $stmt->bindParam(':describtion', $describtion); 
         $stmt->bindParam(':status_id', $status_id);
         $stmt->bindParam(':branch_id', $branch_id);
         $stmt->bindParam(':address', $address);
@@ -73,11 +78,13 @@ class Ads{
         $stmt->execute();
     }
 
-    public function deleteAds(int $id):void{
+    public function deleteAds(int $id):array|false {
+
         $query = "DELETE FROM ads WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
 }

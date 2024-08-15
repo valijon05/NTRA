@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-use App\Status;
 use PDO;
 
 class Status{
@@ -41,8 +40,5 @@ class Status{
         $stmt->execute();
     }
 
-
-
-    
 
 }
