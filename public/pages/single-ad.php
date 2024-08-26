@@ -6,7 +6,7 @@ loadPartials('header');
 loadPartials('navbar');
 
 /**
- * @var $ad // Comes from controller
+ * @var $ad
  */
 ?>
 
@@ -18,7 +18,7 @@ loadPartials('navbar');
                 <div class="grid grid-cols-1 relative">
                     <div class="tiny-one-item">
                         <div class="tiny-slide">
-                            <img src="assets/images/property/single/1.jpg"
+                            <img src="<?=$ad->image?>"
                                  class="rounded-md shadow dark:shadow-gray-700" alt="">
                         </div>
 
