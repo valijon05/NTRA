@@ -43,7 +43,6 @@ loadPartials('header');
                             <input id="RegisterName" type="text" class="form-input mt-3" placeholder="Harry" name="username">
                         </div>
 
-
                         <div class="mb-4">
                             <label class="font-semibold" for="LoginEmail">Email Address:</label>
                             <input id="LoginEmail" type="email" class="form-input mt-3" placeholder="name@example.com" name="email">
