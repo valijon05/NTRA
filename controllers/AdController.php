@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Controllers;
+namespace Controller;
 
 class AdController
 {
     public function show(int $id): void
     {
-        $ad = (new \App\Ads())->getAd($id);
+        /**
+         * @var $id
+         */
+        $ad        = (new \App\Ads())->getAd($id);
         $ad->image = "../assets/images/ads/$ad->image";
 
         loadView('single-ad', ['ad' => $ad]);
-
     }
 
     public function create(): void
     {
-
         $title       = $_POST['title'];
         $description = $_POST['description'];
         $price       = (float) $_POST['price'];
-        $branch      = (int) $_POST['branch'];
         $address     = $_POST['address'];
         $rooms       = (int) $_POST['rooms'];
 
@@ -31,7 +31,7 @@ class AdController
             && $_POST['address']
             && $_POST['rooms']
         ) {
-
+            // TODO: Replace hardcoded values
             $newAdsId = (new \App\Ads())->createAds(
                 $title,
                 $description,
@@ -51,14 +51,16 @@ class AdController
                     exit('Rasm yuklanmadi!');
                 }
 
-                $imageHandler->addImage((int)$newAdsId, $fileName);
+                $imageHandler->addImage((int) $newAdsId, $fileName);
 
                 header('Location: /');
 
                 exit();
             }
+
             return;
         }
+
         echo "Iltimos, barcha maydonlarni to'ldiring!";
     }
 }

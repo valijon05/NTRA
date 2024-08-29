@@ -6,7 +6,7 @@ loadPartials('header');
 loadPartials('navbar');
 
 /**
- * @var $ad
+ * @var $ad // Comes from controller
  */
 ?>
 
