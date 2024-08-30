@@ -79,9 +79,9 @@ class Ads
         int    $id,
         string $title,
         string $description,
-        int    $user_id,
-        int    $status_id,
-        int    $branch_id,
+        // int    $user_id,
+        // int    $status_id,
+        // int    $branch_id,
         string $address,
         float  $price,
         int    $rooms

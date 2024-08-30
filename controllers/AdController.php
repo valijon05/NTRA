@@ -35,7 +35,7 @@ class AdController
             $newAdsId = (new \App\Ads())->createAds(
                 $title,
                 $description,
-                5,
+                13,
                 1,
                 1,
                 $address,
@@ -70,6 +70,7 @@ class AdController
 
     public function update(int $id):void{
         $ad = new \App\Ads();
-        $ad->updateAds($id, $_POST['title'], $_POST['description'], $_POST['price'], $_POST['address'], $_POST['rooms']);
+        $price = (float) $_POST['price'];
+        $ad->updateAds($id, $_POST['title'], $_POST['description'], $_POST['address'], $price, (int)$_POST['rooms']);
     }
 }

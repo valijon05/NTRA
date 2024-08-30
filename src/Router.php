@@ -63,7 +63,7 @@ class Router
 
     public static function post($path, $callback): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path && isset($POST['!method'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path && !isset($POST['_method'])) {
             $callback();
             exit();
         }
@@ -71,28 +71,31 @@ class Router
 
     public static function patch($path, $callback, string|null $middleware = null): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if(strtolower($_POST['_method']) === 'patch'){
-                if ((new self())->getResourceId()) {
-                    $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
-                    if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
-                        $callback((new self())->getResourceId());
-                        exit();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(isset($_POST['_method'])) {
+                if(strtolower($_POST['_method']) === 'patch'){
+                    if ((new self())->getResourceId()) {
+                        $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
+                        if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                            $callback((new self())->getResourceId());
+                            exit();
+                        }
                     }
                 }
-            }
-            
-            if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
-                (new Authentication())->handle($middleware);
-                $callback();
-                exit();
+                
+                if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                    (new Authentication())->handle($middleware);
+                    $callback();
+                    exit();
+                }
             }
         }
     }
 
     public static function put($path, $callback, string|null $middleware = null): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             if(strtolower($_POST['_method']) === 'put'){
                 if ((new self())->getResourceId()) {
                     $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
