@@ -20,6 +20,6 @@ Router::get('/login', fn() => loadView('auth/login'), 'guest');
 Router::post('/login', fn() => (new \Controller\AuthController())->login());
 
 Router::get('/admin', fn() => loadView('dashboard/home'), 'auth');
-Router::get('/profile2', fn() => (new \Controller\UserController())->loadProfile());
+Router::get('/profile2', fn() => (new \Controller\UserController())->loadProfile(),'auth');
 
 Router::errorResponse(404, 'Not Found');

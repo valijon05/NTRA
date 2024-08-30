@@ -1,6 +1,6 @@
 <?php
-
 loadPartials(path: 'header', loadFromPublic: false);
+
 ?>
     <div class="page-wrapper">
         <!-- Start Page Content -->

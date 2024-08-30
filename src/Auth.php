@@ -40,11 +40,6 @@ class Auth
 
         // Execute query
         $userWithRoles = $this->pdo->query($query)->fetch();
-        if ($userWithRoles->role_id === Role::ADMIN) {
-            redirect('/admin');
-        }
-
-
         if ($userWithRoles) {
             $_SESSION['user'] = [
                 'username' => $userWithRoles->username,
@@ -56,6 +51,9 @@ class Auth
             redirect('/profile2');
         }
 
+        if ($userWithRoles->role_id === Role::ADMIN) {
+            redirect('/admin');
+        }
         $_SESSION['message']['error'] = "Wrong email or password";
         redirect('/login');
     }
