@@ -1,6 +1,6 @@
 <?php
-loadPartials(path: 'header', loadFromPublic: false);
 
+loadPartials(path: 'header', loadFromPublic: false);
 ?>
     <div class="page-wrapper">
         <!-- Start Page Content -->
@@ -233,7 +233,7 @@ loadPartials(path: 'header', loadFromPublic: false);
                                         </div>
 
                                         <div class="mt-4">
-                                            <h5 class="text-lg font-semibold"><?= $_SESSION['user']['username']; ?></h5>
+                                            <h5 class="text-lg font-semibold"><?= (new \App\Session())->getName() ?></h5>
                                             <p class="text-slate-400">calvin@hotmail.com</p>
                                         </div>
                                     </div>
@@ -308,17 +308,10 @@ loadPartials(path: 'header', loadFromPublic: false);
 
                         <div class="xl:col-span-9 lg:col-span-8 md:col-span-8 mt-6">
                             <div class="grid grid-cols-1 gap-6">
-                                <div class="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                    <h5 class="text-xl font-semibold">Calvin Carlo</h5>
-
-                                    <p class="text-slate-400 mt-3">I have started my career as a trainee and prove my
-                                        self and achieve all the milestone with good guidance and reach up to the
-                                        project manager. In this journey, I understand all the procedure which make me a
-                                        good developer, team leader, and a project manager.</p>
-                                </div>
+                                <a href="/ads/create" type="submit" id="submit" name="send" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">E'lon qo'shish</a>
 
                                 <div class="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                    <h5 class="text-xl font-semibold">My Property :</h5>
+                                    <h5 class="text-xl font-semibold">Mening e'lonlarim :</h5>
 
                                     <div class="grid lg:grid-cols-3 md:grid-cols-2 mt-6 gap-6">
                                         <?php
@@ -331,14 +324,14 @@ loadPartials(path: 'header', loadFromPublic: false);
                                                     <img src="../assets/images/ads/<?= $ad->image?>" alt="">
 
                                                     <div class="absolute top-4 end-4">
-                                                        <a href="javascript:void(0)"
+                                                        <a href="/ads/update/<?= $ad->id ?>"
                                                            class="btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"><i
                                                                     class="mdi mdi-heart text-[20px]"></i></a>
                                                     </div>
                                                 </div>
 
                                                 <div class="p-6">
-                                                    <div class="pb-6">
+                                                    <div class="pb-6">    
                                                         <a href="/ads/<?= $ad->id ?>"
                                                            class="text-lg hover:text-green-600 font-medium ease-in-out duration-500"><?= $ad->title; ?></a>
                                                     </div>

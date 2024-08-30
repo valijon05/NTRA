@@ -31,7 +31,7 @@ loadPartials('header'); ?>
 
                             <div class="mb-4">
                                 <label class="font-medium" for="LoginPassword">Password:</label>
-                                <input id="LoginPassword" type="password" name="password" class="form-input mt-3" placeholder="Password:"> 
+                                <input id="LoginPassword" type="password" name="password" class="form-input mt-3" placeholder="Password:">
                             </div>
 
                             <div class="flex justify-between mb-4">

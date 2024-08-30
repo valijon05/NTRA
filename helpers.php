@@ -66,16 +66,6 @@ function loadController(string $path, array|null $args = null): void
     require basePath('/controllers/'.$path.'.php');
 }
 
-
-function getUserNameFromSession()
-{
-    if (isset($_SESSION['user']['username'])) {
-        return $_SESSION['user']['username'];
-    }
-
-    return '';
-}
-
 function redirect(string $url): void
 {
     header("Location: $url");

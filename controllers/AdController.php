@@ -63,4 +63,13 @@ class AdController
 
         echo "Iltimos, barcha maydonlarni to'ldiring!";
     }
+
+    public function edit(int $id): void{
+        loadView('dashboard/create-ad', ['ad' => (new \App\Ads())->getAd($id)]);
+    }
+
+    public function update(int $id):void{
+        $ad = new \App\Ads();
+        $ad->updateAds($id, $_POST['title'], $_POST['description'], $_POST['price'], $_POST['address'], $_POST['rooms']);
+    }
 }

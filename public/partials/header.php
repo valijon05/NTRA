@@ -13,17 +13,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 
     <!-- Css -->
-    <link href="../assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
-    <link href="../assets/libs/tobii/css/tobii.min.css" rel="stylesheet">
-    <link href="../assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
-    <link href="../assets/libs/swiper/css/swiper.min.css" rel="stylesheet">
+    <link href="/assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
+    <link href="/assets/libs/tobii/css/tobii.min.css" rel="stylesheet">
+    <link href="/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet">
+    <link href="/assets/libs/swiper/css/swiper.min.css" rel="stylesheet">
     <!-- Main Css -->
-    <link href="../assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
-    <link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="../assets/css/tailwind.css" />
+    <link href="/assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
+    <link href="/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
 
 </head>
 

@@ -15,7 +15,7 @@ class Router
         $this->updates = json_decode(file_get_contents('php://input'));
     }
 
-    public function getResourceName()
+    public function getResourceName(): string
     {
         $uri  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $path = explode('/', $uri);
@@ -43,12 +43,8 @@ class Router
         return $this->updates;
     }
 
-    public static function get($path, $callback, string|null $middleware = null)
+    public static function get($path, $callback, string|null $middleware = null): void
     {
-        if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
-            (new Authentication())->handle($middleware);
-        }
-
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if ((new self())->getResourceId()) {
                 $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
@@ -58,26 +54,64 @@ class Router
                 }
             }
             if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                (new Authentication())->handle($middleware);
                 $callback();
                 exit();
             }
         }
-
-        return (new Router());
-    }
-
-    public function middleware(string $middleware)
-    {
-        // logic goes here
     }
 
     public static function post($path, $callback): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path && isset($POST['!method'])) {
             $callback();
             exit();
         }
     }
+
+    public static function patch($path, $callback, string|null $middleware = null): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            if(strtolower($_POST['_method']) === 'patch'){
+                if ((new self())->getResourceId()) {
+                    $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
+                    if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                        $callback((new self())->getResourceId());
+                        exit();
+                    }
+                }
+            }
+            
+            if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                (new Authentication())->handle($middleware);
+                $callback();
+                exit();
+            }
+        }
+    }
+
+    public static function put($path, $callback, string|null $middleware = null): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            if(strtolower($_POST['_method']) === 'put'){
+                if ((new self())->getResourceId()) {
+                    $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
+                    if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                        $callback((new self())->getResourceId());
+                        exit();
+                    }
+                }
+            }
+            
+            if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                (new Authentication())->handle($middleware);
+                $callback();
+                exit();
+            }
+        }
+    }
+
+    
 
     public static function errorResponse(int $code, $message = 'Error bad request'): void
     {
