@@ -17,7 +17,12 @@ class AdController
         loadView('single-ad', ['ad' => $ad]);
     }
 
-    public function create(): void
+    public function create(){
+        $branches = (new \App\Branch())->getBranches();
+        loadView('dashboard/create-ad', ['branches' => $branches]);
+    }
+
+    public function store(): void
     {
         $title       = $_POST['title'];
         $description = $_POST['description'];
@@ -35,9 +40,9 @@ class AdController
             $newAdsId = (new \App\Ads())->createAds(
                 $title,
                 $description,
-                13,
+                (new \App\Session)->getId(),
                 1,
-                1,
+                (int)$_POST['branch_id'],
                 $address,
                 $price,
                 $rooms
@@ -53,7 +58,7 @@ class AdController
 
                 $imageHandler->addImage((int) $newAdsId, $fileName);
 
-                header('Location: /');
+                redirect('/');
 
                 exit();
             }
@@ -65,12 +70,26 @@ class AdController
     }
 
     public function edit(int $id): void{
-        loadView('dashboard/create-ad', ['ad' => (new \App\Ads())->getAd($id)]);
+        $branches = (new \App\Branch())->getBranches();
+        loadView('dashboard/create-ad', ['ad' => (new \App\Ads())->getAd($id), 'branches' => $branches]);
     }
 
     public function update(int $id):void{
         $ad = new \App\Ads();
+
+        if($_FILES['image']['error']!=4){
+            $uploadPath = basePath("/public/assets/images/ads");
+            $image = new \App\Image();
+            $image_name = $image->getImagesById($id);
+            
+            unlink($uploadPath.'/'.$image_name->name);
+            $newFilename = $image->handleUpload();
+            $image->update($image_name->id,$newFilename);
+        }
+
         $price = (float) $_POST['price'];
-        $ad->updateAds($id, $_POST['title'], $_POST['description'], $_POST['address'], $price, (int)$_POST['rooms']);
-    }
+        $ad->updateAds($id, $_POST['title'], $_POST['description'],(new \App\Session)->getId(),1,$_POST['address'], $price, (int)$_POST['rooms']);
+        redirect('/profile');
+    }  
+
 }

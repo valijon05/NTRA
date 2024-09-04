@@ -79,14 +79,13 @@ class Ads
         int    $id,
         string $title,
         string $description,
-        // int    $user_id,
-        // int    $status_id,
-        // int    $branch_id,
+        int    $status_id,
+        int    $branch_id,
         string $address,
         float  $price,
         int    $rooms
     ) {
-        $query = "UPDATE ads SET title = :title, description = :description, user_id = :user_id,
+        $query = "UPDATE ads SET title = :title, description = :description,
                  status_id = :status_id, branch_id = :branch_id, address = :address, 
                  price = :price, rooms = :rooms, updated_at = NOW() WHERE id = :id";
 
@@ -94,7 +93,6 @@ class Ads
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':status_id', $status_id);
         $stmt->bindParam(':branch_id', $branch_id);
         $stmt->bindParam(':address', $address);

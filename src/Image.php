@@ -26,6 +26,20 @@ class Image
         return $statement->execute();
     }
 
+    public function getImagesById(int $adsId){
+        $stmt = $this->pdo->prepare("SELECT * FROM ads_image WHERE ads_id = :ads_id");
+        $stmt->bindParam(':ads_id', $adsId);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function update(int $adsId, string $name): bool{
+        $stmt = $this->pdo->prepare("UPDATE ads_image SET name = :name WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':name', $name);
+        return $stmt->execute();
+    }
+
     public function handleUpload(): string
     {
         // Check if file uploaded

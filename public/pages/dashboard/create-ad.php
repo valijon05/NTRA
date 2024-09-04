@@ -274,6 +274,15 @@ if (in_array('create', $uri)) {
                                                    placeholder="Sarlavha" value="<?= $ad?->title ?>">
                                         </div>
 
+                                        <div class="md:col-span-12">
+                                           <select name="branch_id" id="">
+                                                <?php foreach($branches as $branch){
+                                                    $selected =($branch->id == $ad->branch_id ? "selected" : "");
+                                                    echo "<option value='$branch->id' $selected > $branch->name</option>";
+                                                }?>
+                                           </select> 
+                                        </div>
+
                                         <div class="md:col-span-4 col-span-12">
                                             <label for="description" class="font-medium">Ta'rif</label>
                                             <div class="form-icon relative mt-2">

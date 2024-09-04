@@ -92,11 +92,33 @@ class Router
         }
     }
 
-    public static function put($path, $callback, string|null $middleware = null): void
+    // public static function put($path, $callback, string|null $middleware = null): void
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    //         if(strtolower($_POST['_method']) === 'put'){
+    //             if ((new self())->getResourceId()) {
+    //                 $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
+    //                 if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+    //                     $callback((new self())->getResourceId());
+    //                     exit();
+    //                 }
+    //             }
+    //         }
+            
+    //         if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+    //             (new Authentication())->handle($middleware);
+    //             $callback();
+    //             exit();
+    //         }
+    //     }
+    // }
+
+    public static function delete($path, $callback, string|null $middleware = null): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            if(strtolower($_POST['_method']) === 'put'){
+            if(strtolower($_POST['_method']) === 'delete'){
                 if ((new self())->getResourceId()) {
                     $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
                     if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
@@ -122,7 +144,6 @@ class Router
         if ($code == 404) {
             loadView('404');
         }
-//        echo json_encode(['ok' => false, 'code' => $code, 'message' => $message]);
         exit();
     }
 }
