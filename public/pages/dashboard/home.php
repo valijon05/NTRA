@@ -31,79 +31,15 @@ loadPartials(path: 'header', loadFromPublic: false);
                 </li>
 
                 <li>
-                    <a href="explore-property.html"><i class="mdi mdi-home-city me-2"></i>Explore Properties</a>
+                    <a href="explore-property.html"><i class="mdi mdi-home-city me-2"></i>E'lonlar</a>
                 </li>
 
                 <li>
-                    <a href="favorite-property.html"><i class="mdi mdi-home-heart me-2"></i>Favorite Properties</a>
+                    <a href="/branch"><i class="mdi mdi-home-heart me-2"></i>Filiallar</a>
                 </li>
 
-                <li>
-                    <a href="add-property.html"><i class="mdi mdi-home-plus me-2"></i>Add Properties</a>
-                </li>
+            
 
-                <li>
-                    <a href="chat.html"><i class="mdi mdi-chat-outline me-2"></i>Chat</a>
-                </li>
-
-                <li class="sidebar-dropdown">
-                    <a href="javascript:void(0)"><i class="mdi mdi-account-edit me-2"></i>User Profile</a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="profile-setting.html">Profile Settings</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="sidebar-dropdown">
-                    <a href="javascript:void(0)"><i class="mdi mdi-post-outline me-2"></i>Blog</a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li><a href="blog.html">Blogs</a></li>
-                            <li><a href="blog-detail.html">Blog Detail</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="sidebar-dropdown">
-                    <a href="javascript:void(0)"><i class="mdi mdi-file-document-outline me-2"></i>Pages</a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li><a href="starter.html">Starter</a></li>
-                            <li><a href="faqs.html">FAQs</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="review.html">Review</a></li>
-                            <li><a href="privacy.html">Privacy Policy</a></li>
-                            <li><a href="terms.html">Term & Condition</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="sidebar-dropdown">
-                    <a href="javascript:void(0)"><i class="mdi mdi-login me-2"></i>Authentication</a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="signup.html">Signup</a></li>
-                            <li><a href="signup-success.html">Signup Success</a></li>
-                            <li><a href="reset-password.html">Reset Password</a></li>
-                            <li><a href="lock-screen.html">Lockscreen</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="sidebar-dropdown">
-                    <a href="javascript:void(0)"><i class="mdi mdi-layers me-2"></i>Miscellaneous</a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li><a href="comingsoon.html">Comingsoon</a></li>
-                            <li><a href="maintenance.html">Maintenance</a></li>
-                            <li><a href="error.html">Error</a></li>
-                            <li><a href="thankyou.html">Thank You</a></li>
-                        </ul>
-                    </div>
-                </li>
 
                 <li class="relative lg:m-8 m-6 px-8 py-10 rounded-lg bg-gradient-to-b to-transparent from-slate-800 text-center">
                             <span class="relative z-10">

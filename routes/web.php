@@ -7,8 +7,8 @@ use Controller\AdController;
 
 Router::get('/', fn() => loadController('home'));
 
+Router::get('/branch', fn() => loadController('branch'));
 Router::get('/ads/{id}', fn(int $id) => ( new AdController())->show($id));
-
 Router::get('/ads/create', fn() => (new AdController())->create());
 Router::post('/ads/create', fn() => (new AdController())->store());
 
@@ -25,5 +25,8 @@ Router::post('/login', fn() => (new \Controller\AuthController())->login());
 
 Router::get('/admin', fn() => loadView('dashboard/home'), 'auth');
 Router::get('/profile', fn() => (new \Controller\UserController())->loadProfile(), 'auth');
+
+Router::get('/branch/create', fn() => loadView('dashboard/create-branch'));
+Router::post('/branch/create', fn() => loadController('createBranch'));
 
 Router::errorResponse(404, 'Not Found');
