@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types=1);
 
 namespace Controller;
+
+
 
 class AdController
 {
@@ -14,6 +15,7 @@ class AdController
     {
         /**
          * @var $id
+         * @var $ad
          */
         $ad        = $this->ads->getAd($id);
         $ad->image = "../assets/images/ads/$ad->image";
@@ -98,6 +100,7 @@ class AdController
 
     public function delete(int $id):void{
         $this->ads->deleteAds($id);
+        redirect('/profile');
     }
 
     public function index(): void{

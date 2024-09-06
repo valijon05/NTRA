@@ -46,7 +46,7 @@ class Ads
     {
         $query = "SELECT ads.*, name AS image
                   FROM ads
-                    JOIN ads_image ON ads.id = ads_image.ads_id
+                  LEFT  JOIN ads_image ON ads.id = ads_image.ads_id
                   WHERE ads.id = :id";
 
         $stmt  = $this->pdo->prepare($query);
