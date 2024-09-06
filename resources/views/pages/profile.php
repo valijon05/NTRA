@@ -359,6 +359,10 @@ loadPartials(path: 'header', loadFromPublic: false);
                                                             <p class="text-lg font-medium">$ <?= $ad->price ?></p>
                                                         </li>
 
+                                                        <li>
+                                                            <button class="p-2 bg-red-600 rounded">O'chirish</button>
+                                                        </li>
+
                                                     </ul>
                                                 </div>
                                             </div><!--end property content-->

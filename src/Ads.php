@@ -105,6 +105,8 @@ class Ads
 
     public function deleteAds(int $id): array|false
     {
+        $image = $this->pdo->query("SELECT name FROM ads_image where ads_id = $id")->fetch()->name;
+        unlink("assets/images/ads/$image");
         $query = "DELETE FROM ads WHERE id = :id";
         $stmt  = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);

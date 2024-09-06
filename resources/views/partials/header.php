@@ -13,15 +13,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="dashboard/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/dashboard/assets/images/favicon.ico">
 
     <!-- Css -->
-    <link href="dashboard/assets/libs/tobii/css/tobii.min.css" rel="stylesheet">
+    <link href="/dashboard/assets/libs/tobii/css/tobii.min.css" rel="stylesheet">
     <!-- Main Css -->
-    <link href="dashboard/assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
-    <link href="dashboard/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="dashboard/assets/css/tailwind.min.css">
+    <link href="/dashboard/assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
+    <link href="/dashboard/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/dashboard/assets/css/tailwind.min.css">
 
 </head>
-
 <body class="font-body text-base text-black dark:text-white dark:bg-slate-900">

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+// declare(strict_types=1);
 
 namespace App;
 
@@ -9,6 +9,9 @@ use PDO;
 class Image
 {
     private PDO $pdo;
+
+    const  DEFAULT_IMAGE = 'default.jpg';
+    const  DEFAULT_PATH = '/assets/images/ads/';
 
     public function __construct()
     {
@@ -70,5 +73,11 @@ class Image
         }
 
         return $fileName;
+    }
+
+    public function show(string|null $file=null):string{
+        return $file
+            ? self::DEFAULT_PATH.$file
+            : self::DEFAULT_PATH.self::DEFAULT_IMAGE;
     }
 }

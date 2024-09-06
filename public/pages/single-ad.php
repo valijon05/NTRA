@@ -119,9 +119,12 @@ loadPartials('navbar');
                             Get in touch!</h3>
 
                         <div class="mt-6">
-                            <a href="contact.html"
-                               class="btn bg-transparent hover:bg-green-600 border border-green-600 text-green-600 hover:text-white rounded-md"><i
-                                        class="uil uil-phone align-middle me-2"></i> Contact us</a>
+                            <form action="/ads/delete/<?php $ad->id?>" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit"
+                               class="btn bg-transparent hover:bg-green-600 border border-green-600 text-green-600 hover:text-white rounded-md">
+                               <i class="uil uil-phone align-middle me-2"></i> Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>

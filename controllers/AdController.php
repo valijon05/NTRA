@@ -6,12 +6,16 @@ namespace Controller;
 
 class AdController
 {
+    public \App\Ads $ads;
+    public function __construct(){
+        $this->ads = new \App\Ads();
+    }
     public function show(int $id): void
     {
         /**
          * @var $id
          */
-        $ad        = (new \App\Ads())->getAd($id);
+        $ad        = $this->ads->getAd($id);
         $ad->image = "../assets/images/ads/$ad->image";
 
         loadView('single-ad', ['ad' => $ad]);
@@ -37,7 +41,7 @@ class AdController
             && $_POST['rooms']
         ) {
             // TODO: Replace hardcoded values
-            $newAdsId = (new \App\Ads())->createAds(
+            $newAdsId = $this->ads->createAds(
                 $title,
                 $description,
                 (new \App\Session)->getId(),
@@ -71,7 +75,7 @@ class AdController
 
     public function edit(int $id): void{
         $branches = (new \App\Branch())->getBranches();
-        loadView('dashboard/create-ad', ['ad' => (new \App\Ads())->getAd($id), 'branches' => $branches]);
+        loadView('dashboard/create-ad', ['ad' => $this->ads->getAd($id), 'branches' => $branches]);
     }
 
     public function update(int $id):void{
@@ -91,5 +95,14 @@ class AdController
         $ad->updateAds($id, $_POST['title'], $_POST['description'],(new \App\Session)->getId(),1,$_POST['address'], $price, (int)$_POST['rooms']);
         redirect('/profile');
     }  
+
+    public function delete(int $id):void{
+        $this->ads->deleteAds($id);
+    }
+
+    public function index(): void{
+        $ads = $this->ads->getAds();
+        loadView('dashboard/ads', ['ads' => $ads]);
+    }
 
 }

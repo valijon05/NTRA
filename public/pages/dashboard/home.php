@@ -31,7 +31,7 @@ loadPartials(path: 'header', loadFromPublic: false);
                 </li>
 
                 <li>
-                    <a href="explore-property.html"><i class="mdi mdi-home-city me-2"></i>E'lonlar</a>
+                    <a href="/admin/ads"><i class="mdi mdi-home-city me-2"></i>E'lonlar</a>
                 </li>
 
                 <li>
