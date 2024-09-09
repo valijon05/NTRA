@@ -1,10 +1,7 @@
 
 <?php
-
 loadPartials(path: 'header', loadFromPublic: false);
 ?>
-    <body class="font-body text-base text-black dark:text-white dark:bg-slate-900">
-
 
 <div class="page-wrapper toggled">
     <!-- sidebar-wrapper -->
@@ -293,7 +290,7 @@ loadPartials(path: 'header', loadFromPublic: false);
                                 <ul class="pt-6 flex justify-between items-center list-none">
                                     <li>
                                         <span class="text-slate-400">Manzil</span>
-                                        <p class="text-lg font-medium"><?= $branch->address ?></p>
+                                        <p class="text-lg font-medium"><?php $branch->address ?></p>
                                     </li>
 
                                 </ul>

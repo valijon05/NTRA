@@ -23,7 +23,8 @@ class AdController
         loadView('single-ad', ['ad' => $ad]);
     }
 
-    public function create(){
+    public function create(): void
+    {
         $branches = (new \App\Branch())->getBranches();
         loadView('dashboard/create-ad', ['branches' => $branches]);
     }
@@ -99,13 +100,27 @@ class AdController
     }  
 
     public function delete(int $id):void{
-        $this->ads->deleteAds($id);
+        $this->ads->deleteAds($id);  
         redirect('/profile');
     }
 
+    public function home()
+    {
+        $ads = (new \App\Ads())->getAds();
+
+        $branches = (new \App\Branch())->getBranches();
+
+        loadView('home', ['ads' => $ads, 'branches' => $branches]);
+    }
     public function index(): void{
         $ads = $this->ads->getAds();
         loadView('dashboard/ads', ['ads' => $ads]);
+    }
+
+    public function search(){
+        $searchPhrase = $_REQUEST['search_phrase'];
+        $ads = $this->ads->searchAds($searchPhrase);
+        loadView('home', ['ads' => $ads]);
     }
 
 }
