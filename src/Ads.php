@@ -114,7 +114,7 @@ class Ads
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function searchAds(string $searchPhrase, string|null $branch=null): array|false
+    public function searchAds(string $searchPhrase, int|null $branch=null): array|false
     {
         $searchPhrase = "%$searchPhrase%";
         $query = "SELECT *,

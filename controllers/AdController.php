@@ -120,7 +120,7 @@ class AdController
     public function search(): void
     {
         $searchPhrase = $_REQUEST['search_phrase'];
-        $branch = $_GET['branch'] ? $_GET['branch'] : null;
+        $branch = $_GET['branch'] ? (int)$_GET['branch'] : null;
         $ads = $this->ads->searchAds($searchPhrase, $branch);
         loadView('home', ['ads' => $ads]);
     }

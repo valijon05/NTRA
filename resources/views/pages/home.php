@@ -295,7 +295,7 @@ loadPartials('navbar');
                 <div class="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                     <div class="relative">
                         <img src="<?php
-                        echo \App\Image::show($ad->image); ?>" alt="">
+                        echo (new App\Image)->show($ad->image); ?>" alt="">
 
                         <div class="absolute top-4 end-4">
                             <a href="javascript:void(0)"
