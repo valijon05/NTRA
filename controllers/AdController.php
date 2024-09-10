@@ -104,9 +104,9 @@ class AdController
         redirect('/profile');
     }
 
-    public function home()
+    public function home(): void
     {
-        $ads = (new \App\Ads())->getAds();
+        $ads = $this->ads->getAds();
 
         $branches = (new \App\Branch())->getBranches();
 
@@ -117,9 +117,11 @@ class AdController
         loadView('dashboard/ads', ['ads' => $ads]);
     }
 
-    public function search(){
+    public function search(): void
+    {
         $searchPhrase = $_REQUEST['search_phrase'];
-        $ads = $this->ads->searchAds($searchPhrase);
+        $branch = $_GET['branch'] ? $_GET['branch'] : null;
+        $ads = $this->ads->searchAds($searchPhrase, $branch);
         loadView('home', ['ads' => $ads]);
     }
 

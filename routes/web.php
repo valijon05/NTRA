@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Router;
 use Controller\AdController;
 
-Router::get('/', fn() => loadController('home'));
+Router::get('/', fn() => (new AdController())->home());
 
 Router::get('/branch', fn() => loadController('branch'));
 Router::get('/ads/{id}', fn(int $id) => ( new AdController())->show($id));
@@ -33,5 +33,7 @@ Router::get('/profile', fn() => (new \Controller\UserController())->loadProfile(
 
 Router::get('/branch/create', fn() => loadView('dashboard/create-branch'));
 Router::post('/branch/create', fn() => loadController('createBranch'));
+
+Router::get('search', fn() => (new AdController())->search());
 
 Router::errorResponse(404, 'Not Found');

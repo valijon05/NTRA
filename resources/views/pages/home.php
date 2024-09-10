@@ -1,6 +1,8 @@
 
 <?php
-
+/*
+ * @var $branches
+ */
 loadPartials('header');
 loadPartials('navbar');
 ?>
@@ -46,8 +48,7 @@ loadPartials('navbar');
 
                                         <div>
                                             <label for="buy-properties"
-                                                   class="form-label font-medium text-slate-900 dark:text-white">Select
-                                                Categories:</label>
+                                                   class="form-label font-medium text-slate-900 dark:text-white">Filial Tanlang:</label>
                                             <div class="filter-search-form relative filter-border mt-2">
                                                 <i class="uil uil-estate icons"></i>
                                                 <select class="form-select z-2" data-trigger name="branch"
