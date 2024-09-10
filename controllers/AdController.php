@@ -119,10 +119,15 @@ class AdController
 
     public function search(): void
     {
-        $searchPhrase = $_REQUEST['search_phrase'];
-        $branch = $_GET['branch'] ? (int)$_GET['branch'] : null;
-        $ads = $this->ads->searchAds($searchPhrase, $branch);
-        loadView('home', ['ads' => $ads]);
+        $searchPhrase = $_GET['search_phrase'];
+        $searchBranch = $_GET['search_branch'] ? (int)$_GET['search_branch'] : null;
+        $searMinPrice = $_GET['min_price'] ? (int)$_GET['min_price'] : 0;
+        $searMaxPrice = $_GET['max_price'] ? (int)$_GET['max_price'] : PHP_INT_MAX;
+
+        $ads = $this->ads->searchAds($searchPhrase, $searchBranch,$searMinPrice,$searMaxPrice);
+        $branches = (new \App\Branch())->getBranches();
+        loadView('home', ['ads' => $ads, 'branches' => $branches]);
+
     }
 
 }

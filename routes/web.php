@@ -34,6 +34,6 @@ Router::get('/profile', fn() => (new \Controller\UserController())->loadProfile(
 Router::get('/branch/create', fn() => loadView('dashboard/create-branch'));
 Router::post('/branch/create', fn() => loadController('createBranch'));
 
-Router::get('search', fn() => (new AdController())->search());
+Router::get('/search', fn() => (new AdController())->search());
 
 Router::errorResponse(404, 'Not Found');

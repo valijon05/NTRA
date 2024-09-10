@@ -17,6 +17,7 @@ class Auth
 
     public function login(string $username, string $password)
     {
+        dd(123);
         // Get user or fail
         $user = (new User())->getByUsername($username, $password);
 
