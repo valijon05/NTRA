@@ -63,6 +63,7 @@ class Router
 
     public static function post($path, $callback): void
     {
+//        dd('ishladi');
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path && !isset($POST['_method'])) {
             $callback();
             exit();
