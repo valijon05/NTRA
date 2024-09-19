@@ -1,61 +1,85 @@
 <?php
 
+declare(strict_types=1);
 
-namespace Controller;
+namespace Controllers;
 
-
+use App\Ads;
+use App\Branch;
+use App\Session;
+use App\Status;
 
 class AdController
 {
-    public \App\Ads $ads;
-    public function __construct(){
-        $this->ads = new \App\Ads();
+    public Ads $ads;
+
+    public function __construct()
+    {
+        $this->ads = new Ads();
     }
+
+    public function index(): void
+    {
+        $ads = $this->ads->getAds();
+        loadView('dashboard/ads', ['ads' => $ads]);
+    }
+
     public function show(int $id): void
     {
-        /**
-         * @var $id
-         * @var $ad
-         */
-        $ad        = $this->ads->getAd($id);
-        $ad->image = "../assets/images/ads/$ad->image";
-
+        $ad = $this->ads->getAd($id);
         loadView('single-ad', ['ad' => $ad]);
+    }
+
+    public function show_branch(int $id): void
+    {
+        $ads = $this->ads->branches($id);
+        loadView('/dashboard/single-branch', ['ads' => $ads]);
     }
 
     public function create(): void
     {
-        $branches = (new \App\Branch())->getBranches();
-        loadView('dashboard/create-ad', ['branches' => $branches]);
+        loadView('/dashboard/create-ad', [
+            'action'   => "/admin/ads/store",
+            'ad'       => null,
+            'branches' => (new Branch())->getBranches()
+        ]);
     }
 
-    public function store(): void
+    public function store(int|null $id = null): void
     {
-        $title       = $_POST['title'];
-        $description = $_POST['description'];
-        $price       = (float) $_POST['price'];
-        $address     = $_POST['address'];
-        $rooms       = (int) $_POST['rooms'];
-
         if ($_POST['title']
             && $_POST['description']
             && $_POST['price']
             && $_POST['address']
             && $_POST['rooms']
+            && $_POST['branch']
         ) {
-            // TODO: Replace hardcoded values
-            $newAdsId = $this->ads->createAds(
-                $title,
-                $description,
-                (new \App\Session)->getId(),
-                1,
-                (int)$_POST['branch_id'],
-                $address,
-                $price,
-                $rooms
-            );
+            if ($id) {
+                $ad = $this->ads->updateAds(
+                    $id,
+                    $_POST['title'],
+                    trim($_POST['description']),
+                    (new Session())->getId(),
+                    Status::ACTIVE,
+                    (int) $_POST['branch'],
+                    $_POST['address'],
+                    (float) $_POST['price'],
+                    (int) $_POST['rooms']
+                );
+            } else {
+                $ad = $this->ads->createAds(
+                    $_POST['title'],
+                    trim($_POST['description']),
+                    (new Session())->getId(),
+                    Status::ACTIVE,
+                    (int) $_POST['branch'],
+                    $_POST['address'],
+                    (float) $_POST['price'],
+                    (int) $_POST['rooms']
+                );
+            }
 
-            if ($newAdsId) {
+            if ($ad && $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
                 $imageHandler = new \App\Image();
                 $fileName     = $imageHandler->handleUpload();
 
@@ -63,71 +87,45 @@ class AdController
                     exit('Rasm yuklanmadi!');
                 }
 
-                $imageHandler->addImage((int) $newAdsId, $fileName);
-
-                redirect('/');
-
-                exit();
+                $imageHandler->addImage((int) $ad, $fileName);
             }
 
-            return;
+            header('Location: /admin/ads/create');
+
+            exit();
         }
 
         echo "Iltimos, barcha maydonlarni to'ldiring!";
     }
 
-    public function edit(int $id): void{
-        $branches = (new \App\Branch())->getBranches();
-        loadView('dashboard/create-ad', ['ad' => $this->ads->getAd($id), 'branches' => $branches]);
-    }
-
-    public function update(int $id):void{
-        $ad = new \App\Ads();
-
-        if($_FILES['image']['error']!=4){
-            $uploadPath = basePath("/public/assets/images/ads");
-            $image = new \App\Image();
-            $image_name = $image->getImagesById($id);
-            
-            unlink($uploadPath.'/'.$image_name->name);
-            $newFilename = $image->handleUpload();
-            $image->update($image_name->id,$newFilename);
-        }
-
-        $price = (float) $_POST['price'];
-        $ad->updateAds($id, $_POST['title'], $_POST['description'],(new \App\Session)->getId(),1,$_POST['address'], $price, (int)$_POST['rooms']);
-        redirect('/profile');
-    }  
-
-    public function delete(int $id):void{
-        $this->ads->deleteAds($id);  
-        redirect('/profile');
-    }
-
-    public function home(): void
+    public function update(int $id): void
     {
-        $ads = $this->ads->getAds();
-
-        $branches = (new \App\Branch())->getBranches();
-
-        loadView('home', ['ads' => $ads, 'branches' => $branches]);
+        loadView('dashboard/update-ad', [
+            'action'   => "/admin/ads/update/$id",
+            'ad'       => $this->ads->getAd($id),
+            'branches' => (new Branch())->getBranches(),
+        ]);
     }
-    public function index(): void{
-        $ads = $this->ads->getAds();
-        loadView('dashboard/ads', ['ads' => $ads]);
+
+    public function delete(int $id): void
+    {
+        $this->ads->deleteAds($id);
+        redirect('/admin/ads');
     }
 
     public function search(): void
     {
-        $searchPhrase = $_GET['search_phrase'];
-        $searchBranch = $_GET['search_branch'] ? (int)$_GET['search_branch'] : null;
-        $searMinPrice = $_GET['min_price'] ? (int)$_GET['min_price'] : 0;
-        $searMaxPrice = $_GET['max_price'] ? (int)$_GET['max_price'] : PHP_INT_MAX;
 
-        $ads = $this->ads->searchAds($searchPhrase, $searchBranch,$searMinPrice,$searMaxPrice);
+        $searchPhrase = $_REQUEST['search_phrase'];
+        $searchBranch = $_GET['search_branch'] ? (int) $_GET['search_branch'] : null;
+        $searchMinPrice = $_GET['min_price'] ? (int) $_GET['min_price'] : 0;
+        $searchMaxPrice = $_GET['max_price'] ? (int) $_GET['max_price'] : PHP_INT_MAX;
+
+
+        $ads = (new \App\Ads())->superSearch($searchPhrase, $searchBranch, $searchMinPrice, $searchMaxPrice);
         $branches = (new \App\Branch())->getBranches();
         loadView('home', ['ads' => $ads, 'branches' => $branches]);
-
     }
+
 
 }

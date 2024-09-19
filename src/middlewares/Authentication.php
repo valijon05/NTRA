@@ -8,7 +8,6 @@ use App\Session;
 
 class Authentication
 {
-
     public function handle(string|null $middleware = null): void
     {
         if (!$middleware) {

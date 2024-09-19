@@ -6,6 +6,8 @@ namespace App;
 
 class Status
 {
+    const int ACTIVE   = 1;
+    const int INACTIVE = 2;
 
     private \PDO $pdo;
 

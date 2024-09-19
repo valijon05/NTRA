@@ -23,4 +23,5 @@
     <link rel="stylesheet" href="/dashboard/assets/css/tailwind.min.css">
 
 </head>
+
 <body class="font-body text-base text-black dark:text-white dark:bg-slate-900">

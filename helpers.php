@@ -22,11 +22,13 @@ function basePath(string $path): string
     return __DIR__.$path;
 }
 
-function loadView(string $path, array|null $args = null): void
+function loadView(string $path, array|null $args = null, bool $loadFromPublic = true): void
 {
-    
+    if ($loadFromPublic) {
+        $file = "/public/pages/$path.php";
+    } else {
         $file = "/resources/views/pages/$path.php";
-    
+    }
 
     $filePath = basePath($file);
 
@@ -54,6 +56,22 @@ function loadPartials(string $path, array|null $args = null, bool $loadFromPubli
     }
 
     require basePath($file);
+}
+
+function loadComponent(string $path, array|null $args = null): void
+{
+    if (is_array($args)) {
+        extract($args);
+    }
+
+    $file = basePath("/resources/views/components/$path.php");
+
+    if (!file_exists($file)) {
+        echo "Required component not found: $file";
+        return;
+    }
+
+    require $file;
 }
 
 function loadController(string $path, array|null $args = null): void

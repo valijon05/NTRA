@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Controller;
+namespace Controllers;
 
 use App\Auth;
 
@@ -15,6 +15,7 @@ class AuthController
         $password = $_POST['password'];
 
         (new Auth())->login($username, $password);
+
     }
 
 }

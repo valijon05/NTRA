@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
-$branch=(new \App\Branch())->getBranches();
+$branches = (new \App\Branch())->getBranches();
 
-loadView('branch',['branch'=>$branch]);
+loadView('dashboard/branches_user', ['branches' => $branches]);
+
+

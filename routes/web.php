@@ -3,37 +3,44 @@
 declare(strict_types=1);
 
 use App\Router;
-use Controller\AdController;
+use Controllers\AdController;
+use Controllers\BranchController;
+use Controllers\UserController;
 
-Router::get('/', fn() => (new AdController())->home());
+Router::get('/', fn() => loadController('home'));
+Router::get('/branches', fn() => loadController('branch'));
 
-Router::get('/branch', fn() => loadController('branch'));
-Router::get('/ads/{id}', fn(int $id) => ( new AdController())->show($id));
-Router::get('/ads/create', fn() => (new AdController())->create());
-Router::post('/ads/create', fn() => (new AdController())->store());
+Router::get('/logout', fn() => (new UserController())->logout());
 
-Router::delete('/ads/delete/{id}',fn(int $id) => (new AdController())->delete($id));
-Router::get('/ads/update/{id}', fn(int $id) => (new AdController())->edit($id));
-Router::patch('/ads/update/{id}', fn(int $id) => (new AdController())->update($id));
+Router::get('/ads/{id}', fn(int $id) => (new AdController())->show($id));
+Router::get('/branches/{id}', fn(int $id) => (new AdController())->show_branch($id));
+
+
+Router::get('/admin/ads/create', fn() => (new AdController())->create(), 'auth');
+Router::post('/admin/ads/store', fn() => (new AdController())->store());
+Router::get('/admin/ads/update/{id}', fn(int $id) => (new AdController())->update($id));
+Router::patch('/admin/ads/update/{id}', fn(int $id) => (new AdController())->store($id));
+Router::delete('/ads/delete/{id}', fn(int $id) => (new AdController())->delete($id));
 
 // Statuses
 Router::get('/status/create', fn() => loadView('dashboard/create-status'));
 Router::post('/status/create', fn() => loadController('createStatus'));
 
 Router::get('/login', fn() => loadView('auth/login'), 'guest');
-Router::post('/login', fn() => (new \Controller\AuthController())->login());
+Router::post('/login', fn() => (new \Controllers\AuthController())->login());
 
 Router::get('/admin', fn() => loadView('dashboard/home'), 'auth');
-Router::get('/admin/ads', fn()=> (new AdController())->index(),'auth');
+Router::get('/admin/ads', fn() => (new AdController())->index(), 'auth');
+Router::get('/admin/branches', fn() => (new \Controllers\BranchController())->index(), 'auth');
 
-Router::get('/admin/branches', fn()=> (new \Controller\BranchController())->index(), 'auth');
+Router::get('/profile', fn() => (new \Controllers\UserController())->loadProfile(), 'auth');
 
 
-Router::get('/profile', fn() => (new \Controller\UserController())->loadProfile(), 'auth');
-
-Router::get('/branch/create', fn() => loadView('dashboard/create-branch'));
-Router::post('/branch/create', fn() => loadController('createBranch'));
+Router::get('/admin/users', fn() => (new UserController())->index(), 'auth');
+Router::get('/admin/users/{id}', fn(int $id) => (new UserController())->show($id), 'auth');
+Router::get('/admin/users/update/{id}', fn(int $id) => (new UserController())->update($id), 'auth');
 
 Router::get('/search', fn() => (new AdController())->search());
 
 Router::errorResponse(404, 'Not Found');
+

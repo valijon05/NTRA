@@ -2,12 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Controller;
+namespace Controllers;
+
+use App\Branch;
 
 class BranchController
 {
-    public function index():void{
-        $branches = (new \App\Branch())->getBranches();
+    public function index(): void
+    {
+        $branches = (new Branch())->getBranches();
         loadView('dashboard/branches', ['branches' => $branches]);
     }
+    public function BranchName(): void
+    {
+        $branchname = (new Branch())->getBranchName();
+        loadView('dashboard/branch', ['branch' => $branchname]);
+    }
+
 }
